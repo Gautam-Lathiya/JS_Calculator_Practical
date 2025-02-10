@@ -268,7 +268,7 @@ Calculator.prototype.handleOperation = function (operation) {
         ) {
           this.displayValue += "×";
         }
-        this.displayValue += "e";
+        this.displayValue += operation.toUpperCase();
         break;
       case "root":
         if (
@@ -309,7 +309,7 @@ Calculator.prototype.evaluateExpression = function (expr) {
 
   expr = expr
     .replace(/PI/g, Math.PI.toString())
-    .replace(/e/g, Math.E.toString())
+    .replace(/EPS/g, Math.E.toString())
     .replace(/\^/g, "**");
 
   if (!MathUtils.isValidExpression(expr)) {

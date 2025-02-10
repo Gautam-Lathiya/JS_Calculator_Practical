@@ -164,6 +164,40 @@ Calculator.prototype.appendNumber = function (number) {
 Calculator.prototype.handleOperation = function (operation) {
   try {
     switch (operation) {
+      case "square":
+        if (this.displayValue) {
+          const result = Math.pow(parseFloat(this.displayValue), 2);
+          this.displayValue = MathUtils.formatNumber(result);
+        }
+        break;
+
+      case "cube":
+        if (this.displayValue) {
+          const result = Math.pow(parseFloat(this.displayValue), 3);
+          this.displayValue = MathUtils.formatNumber(result);
+        }
+        break;
+      case "abs":
+        if (this.displayValue) {
+          const result = Math.abs(parseFloat(this.displayValue));
+          this.displayValue = MathUtils.formatNumber(result);
+        }
+        break;
+
+        case "exponent":
+          if (this.displayValue) {
+            const value = Math.abs(parseFloat(this.displayValue));
+            const result = value.toExponential();
+            this.displayValue = result;
+          }
+          break;
+
+      case "reciprocal":
+        if (this.displayValue) {
+          const result = 1 / parseFloat(this.displayValue);
+          this.displayValue = MathUtils.formatNumber(result);
+        }
+        break;
       case "clear":
         this.displayValue = "";
         break;
@@ -247,7 +281,10 @@ Calculator.prototype.handleOperation = function (operation) {
         this.displayValue += "pow10(";
         break;
       case "sin":
+      case "asin":
       case "cos":
+      case "acos":
+      case "atan":
       case "tan":
         if (
           this.displayValue &&
@@ -331,7 +368,7 @@ Calculator.prototype.evaluateExpression = function (expr) {
 // Processes nested mathematical operations in the expression
 Calculator.prototype.processNestedOperations = function (expr) {
   const patterns = {
-    trig: /(sin|cos|tan)\(([^()]+)\)/g,
+    trig: /(sin|cos|tan|asin|acos|atan)\(([^()]+)\)/g,
     log: /(log|ln)\(([^()]+)\)/g,
     factorial: /(\d+|\([^()]+\))!/g,
     power: /pow10\(([^()]+)\)/g,

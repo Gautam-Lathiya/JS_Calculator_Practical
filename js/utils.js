@@ -80,6 +80,12 @@ export const MathUtils = {
           return Math.sin(num);
         case "cos":
           return Math.cos(num);
+        case "asin":
+          return Math.asin(num);
+        case "acos":
+          return Math.acos(num);
+        case "atan":
+          return Math.atan(num);
         case "tan":
           if (Math.abs(Math.cos(num)) < 1e-10) {
             throw new Error("Undefined (tan 90°)");
